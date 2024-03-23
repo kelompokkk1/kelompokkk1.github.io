@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Octal to Binary Calculator</title>
+  <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+ 
+</head>
+<body>
+
+  <div class="calculator">
+    <a class="btn-close" aria-label="close" style="text-decoration: none;" href="http://127.0.0.1:5500/tugas%20uts/index.html">-</a>
+
+    <h1>Octal to Binary Calculator</h1>
+    <input type="text" id="octalInput" placeholder="Enter octal number">
+    <div>
+      <button onclick="appendToInput('7')">7</button>
+      <button onclick="appendToInput('8')">8</button>
+      <button onclick="appendToInput('9')">9</button>
+      <button class="operator" onclick="appendToInput('+')">+</button>
+    </div>
+    <div>
+      <button onclick="appendToInput('4')">4</button>
+      <button onclick="appendToInput('5')">5</button>
+      <button onclick="appendToInput('6')">6</button>
+      <button class="operator" onclick="appendToInput('-')">-</button>
+    </div>
+    <div>
+      <button onclick="appendToInput('1')">1</button>
+      <button onclick="appendToInput('2')">2</button>
+      <button onclick="appendToInput('3')">3</button>
+      <button class="operator" onclick="appendToInput('*')">*</button>
+    </div>
+    <div>
+      <button onclick="appendToInput('0')">0</button>
+      <button onclick="clearInput()">C</button>
+      <button class="operator" onclick="calculateResult()">=</button>
+      <button class="operator" onclick="appendToInput('/')">/</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function appendToInput(character) {
+      document.getElementById('octalInput').value += character;
+    }
+
+    function clearInput() {
+      document.getElementById('octalInput').value = '';
+      document.getElementById('result').innerText = '';
+    }
+
+    function calculateResult() {
+      var octalInput = document.getElementById('octalInput').value;
+
+      // Hapus karakter non-oktal sebelum evaluasi
+      octalInput = octalInput.replace(/[^0-7+\-*\/]/g, '');
+
+      // Evaluasi ekspresi matematika
+      try {
+        var decimalNumber = parseInt(octalInput, 8);
+        var binaryNumber = decimalNumber.toString(2);
+        document.getElementById('result').innerText = 'Binary: ' + binaryNumber;
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error';
+      }
+    }
+  </script>
+
+</body>
+</html>
